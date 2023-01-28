@@ -12,11 +12,11 @@ packages needed for Docker container to support RTSP client
 
 > python3 -m pip install scikit-build
 
-wget https://github.com/RinCat/RTL88x2BU-Linux-Driver/archive/master.zip
-unzip master.zip
-cd RTL88x2BU-Linux-Driver-master
-make
-sudo make install
-sudo modprobe 88x2bu rtw_switch_usb_mode=1
+>wget https://github.com/RinCat/RTL88x2BU-Linux-Driver/archive/master.zip
+>unzip master.zip
+>cd RTL88x2BU-Linux-Driver-master
+>make
+>sudo make install
+>sudo modprobe 88x2bu rtw_switch_usb_mode=1
 
-sudo chmod 666 /var/run/docker.sock
+>sudo chmod 666 /var/run/docker.sock
