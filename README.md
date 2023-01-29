@@ -12,6 +12,8 @@ packages needed for Docker container to support RTSP client
 
 > python3 -m pip install scikit-build
 
+# wifi driver (https://github.com/RinCat/RTL88x2BU-Linux-Driver)
+
 >wget https://github.com/RinCat/RTL88x2BU-Linux-Driver/archive/master.zip
 
 >unzip master.zip
