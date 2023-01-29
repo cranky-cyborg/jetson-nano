@@ -29,3 +29,11 @@ packages needed for Docker container to support RTSP client
 # remove LibreOffice
  
 > sudo apt remove libreoffice-writer libreoffice-impress libreoffice-math libreoffice-calc libreoffice-base-core libreoffice-core libreoffice-common libdjvulibre21 libdjvulibre-text 
+
+
+# remove games
+
+> sudo apt remove aisleriot compton gnome-mahjongg gnome-mines gnome-sudoku leafpad thunderbird ibus-table transmission-common rhythmbox lxmusic 
+
+
+> sudo apt remove fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-mlym fonts-lohit-orya fonts-lohit-taml fonts-lohit-taml-classical fonts-lohit-telu
