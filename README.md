@@ -37,3 +37,11 @@ packages needed for Docker container to support RTSP client
 
 
 > sudo apt remove fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-mlym fonts-lohit-orya fonts-lohit-taml fonts-lohit-taml-classical fonts-lohit-telu
+
+> sudo apt autoremove
+
+# setup swap / zram to be specific
+
+> sudo apt install zram-config
+
+
