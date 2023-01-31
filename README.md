@@ -46,4 +46,10 @@ packages needed for Docker container to support RTSP client
 
 > sudo apt install zram-config
 
+# docker config
+
+> sudo usermod -aG docker ${USER}
+> sudo chmod 666 /var/run/docker.sock
+
+
 
