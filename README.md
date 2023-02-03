@@ -52,4 +52,12 @@ packages needed for Docker container to support RTSP client
 > sudo chmod 666 /var/run/docker.sock
 
 
+# Remove password requirements from SUDO
+
+> sudo visudo
+# manually add below line at the end
+pawan ALL=(ALL) NOPASSWD: ALL
+
+
+
 
