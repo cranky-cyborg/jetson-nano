@@ -40,7 +40,7 @@ packages needed for Docker container to support RTSP client
 
 > sudo apt remove fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-mlym fonts-lohit-orya fonts-lohit-taml fonts-lohit-taml-classical fonts-lohit-telu
 
-> sudo apt remove gpicview xterm transmission-common simple-scan shotwell system-config-printer deja-dup rhythmbox lxterminal vim gnome-todo unity-lens-photos yelp onboard gnome-screenshot xserver-xorg-input-wacom 
+> sudo apt remove gpicview xterm transmission-common simple-scan shotwell system-config-printer deja-dup rhythmbox lxterminal vim gnome-todo unity-lens-photos yelp onboard gnome-screenshot xserver-xorg-input-wacom  gnome-online-accounts
 
 > sudo apt autoremove
 
