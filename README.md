@@ -6,7 +6,7 @@ packages needed for Docker container to support RTSP client
 
 > sudo apt upgrade
 
-> sudo apt install tensorrt python3-testresources python3-pip gstreamer-1.0 gstreamer1.0-dev python3-gi python3-gst-1.0 libgirepository1.0-dev libcairo2-dev gir1.2-gstreamer-1.0 gir1.2-gst-rtsp-server-1.0 libcanberra-gtk-module libcanberra-gtk3-module
+> sudo apt install tensorrt python3-testresources python3-pip gstreamer-1.0 gstreamer1.0-dev python3-gi python3-gst-1.0 libgirepository1.0-dev libcairo2-dev gir1.2-gstreamer-1.0 gir1.2-gst-rtsp-server-1.0 libcanberra-gtk-module libcanberra-gtk3-module 
 
 > python3 -m pip install --upgrade pip
 
@@ -39,6 +39,8 @@ packages needed for Docker container to support RTSP client
 
 
 > sudo apt remove fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-mlym fonts-lohit-orya fonts-lohit-taml fonts-lohit-taml-classical fonts-lohit-telu
+
+> sudo apt remove gpicview xterm transmission-common simple-scan shotwell system-config-printer 
 
 > sudo apt autoremove
 
