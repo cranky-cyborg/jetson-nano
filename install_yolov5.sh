@@ -9,8 +9,11 @@ python3 -m pip install --upgrade pip
 
 #depencencies needed for Docker to run RTSP client
 sudo apt install -y  python3-testresources gstreamer-1.0 gstreamer1.0-dev python3-gi python3-gst-1.0 libgirepository1.0-dev libcairo2-dev gir1.2-gstreamer-1.0 gir1.2-gst-rtsp-server-1.0 libcanberra-gtk-module libcanberra-gtk3-module
+python3 -m pip install scikit-build
+
 #other dependencies
-sudo apt install -y libfreetype6-dev tensorrt
+sudo apt install -y libfreetype6-dev tensorrt libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev libpng-dev 
+echo 'export OPENBLAS_CORETYPE=ARMV8' | tee -e ~/.bashrc
 
 #install DeepStream
 
@@ -22,71 +25,62 @@ sudo apt install -y libssl1.0.0 libjansson4=2.11-1
 
 sudo apt install -y libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 
 
-
-# -- install kafka
+# (Deepsteam)-- install kafka
 git clone https://github.com/edenhill/librdkafka.git
 git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a
 ./configure
 make
 sudo make install
 
+# copy the files to the deepstream folder
 sudo mkdir -p /opt/nvidia/deepstream/deepstream-6.0/lib
-
 sudo cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.0/lib
 
-sudo apt update
+# reinstall the nvidid packages for deepstream
 sudo apt install --reinstall nvidia-l4t-gstreamer
 sudo apt install --reinstall nvidia-l4t-multimedia
 sudo apt install --reinstall nvidia-l4t-core
 
 
-# install deepstream (package)
+# install deepstream from package (approx 600mb)
 
 sudo apt install /media/${USER}/drivers/deepstream-6.0_6.0.1-1_arm64.deb
 
 
-#time to yolo v5
+# yolo v5
 
 git clone https://github.com/pawangonnakuti/yolov5-jetson-nano.git yolov5
 
 cd yolov5
 
+# i've edited requirements.txt in my repo, if using any other repo you will need to comment torch ad torchvision
 #cp requirements.txt requirements.txt.bkup
 
 #sed -i 's/^torch>=1.7.0/#torch>=1.7.0/' requirements.txt
 #sed -i 's/^torchvision>=0.8.1/#torchvision>=0.8.1/' requirements.txt
 
-
-
+# install requirements.
 python3 -m pip install -r requirements.txt
+
+# make sure there are no errors in the installment.
 
 cd ~
 
 #install PyTorch
-sudo apt-get install -y libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev libpng-dev
-
-export OPENBLAS_CORETYPE=ARMV8 | tee -e ~/.bashrc
 
 wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 
 python3 -m pip install torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 
-sudo apt install -y 
-
 #install TorchVision
-sudo apt install -y libjpeg-dev zlib1g-dev
 git clone --branch v0.11.1 https://github.com/pytorch/vision torchvision
 cd torchvision
 sudo python3 setup.py install 
 
 
-
-
-
 #build deepSteam-yolo
 cd ~
 git clone https://github.com/marcoslucianops/DeepStream-Yolo
-
 
 cp DeepStream-Yolo/utils/gen_wts_yoloV5.py yolov5
 
@@ -114,12 +108,18 @@ CUDA_VER=10.2 make -C nvdsinfer_custom_impl_Yolo
 #> model-file=yolov5s.wts
 #> ...
 
+#if the configuration needs to change then the below script can be used.
+#sed -i 's/^custom-network-config=yolov5s.cfg/custom-network-config=yolov5s.cfg/' config_infer_primary_yoloV5.txt
+#sed -i 's/^model-file=yolov5s.wts/model-file=yolov5s.wts' config_infer_primary_yoloV5.txt
 
 # edit the Edit the deepstream_app_config file
 #> ...
 #> [primary-gie]
 #> ...
 #> config-file=config_infer_primary_yoloV5.txt
+
+#changing the primary inference file to config_infer_primary_yoloV5.txt
+sed -i 's/^config-file=config_infer_primary.txt/config_infer_primary_yoloV5.txt/' deepstream_app_config.txt
 
 # Change the video source in deepstream_app_config file. Here a default video file is loaded as you can see below
 
@@ -128,6 +128,7 @@ CUDA_VER=10.2 make -C nvdsinfer_custom_impl_Yolo
 #> ...
 #> uri=file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_1080p_h264.mp4
 
+#we will not change the source / uri for now, lets just run this.
 
 # run the inference
 
