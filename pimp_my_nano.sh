@@ -23,4 +23,22 @@ sudo apt remove -y gpicview xterm transmission-common simple-scan shotwell syste
 sudo apt -y autoremove
 
 
-# 
+# Update upgrade and install some essential packages
+
+sudo apt update -y
+
+sudo apt upgrade -y 
+
+sudo apt install zram-config
+
+#an issue with docker, when running the service
+sudo usermod -aG docker ${USER} 
+
+sudo chmod 666 /var/run/docker.sock
+
+#remove sudo from asking password - another annoyance
+echo " " | sudo EDITOR='tee -a' visudo
+echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
+
+
+
