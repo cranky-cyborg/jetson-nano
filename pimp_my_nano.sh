@@ -29,7 +29,7 @@ sudo apt update -y
 
 sudo apt upgrade -y 
 
-sudo apt install zram-config tensorrt
+sudo apt install zram-config
 
 #an issue with docker, when running the service
 sudo usermod -aG docker ${USER} 
