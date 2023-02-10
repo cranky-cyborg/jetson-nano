@@ -38,6 +38,10 @@ cd torchvision
 sudo python3 setup.py install 
 
 #install DeepStream
+sudo apt install libssl1.1 libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstreamer-plugins-base1.0-dev libgstrtspserver-1.0-0 libjansson4 libyaml-cpp-dev
+
+
+#build deepSteam-yolo
 cd ~
 git clone https://github.com/marcoslucianops/DeepStream-Yolo
 
