@@ -13,7 +13,7 @@ python3 -m pip install scikit-build
 
 #other dependencies
 sudo apt install -y libfreetype6-dev tensorrt libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev libpng-dev 
-echo 'export OPENBLAS_CORETYPE=ARMV8' | tee -e ~/.bashrc
+echo 'export OPENBLAS_CORETYPE=ARMV8' | tee -a ~/.bashrc
 
 #install DeepStream
 
