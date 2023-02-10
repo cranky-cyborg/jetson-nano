@@ -18,7 +18,7 @@ sed -i 's/^torchvision>=0.8.1/#torchvision>=0.8.1/' requirements.txt
 
 sudo apt install -y libfreetype6-dev
 
-pip3 install -r requirements.txt
+python3 -m pip install -r requirements.txt
 
 cd ~
 
@@ -27,7 +27,7 @@ sudo apt-get install -y libopenblas-base libopenmpi-dev
 
 wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 
-pip3 install torch-1.10.0-cp36-cp36m-linux_aarch64.whl
+python3 -m pip install torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 
 sudo apt install -y libjpeg-dev zlib1g-dev
 
