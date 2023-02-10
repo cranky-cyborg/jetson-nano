@@ -119,7 +119,7 @@ CUDA_VER=10.2 make -C nvdsinfer_custom_impl_Yolo
 #> config-file=config_infer_primary_yoloV5.txt
 
 #changing the primary inference file to config_infer_primary_yoloV5.txt
-sed -i 's/^config-file=config_infer_primary.txt/config_infer_primary_yoloV5.txt/' deepstream_app_config.txt
+sed -i 's/^config-file=config_infer_primary.txt/config-file=cconfig_infer_primary_yoloV5.txt/' deepstream_app_config.txt
 
 # Change the video source in deepstream_app_config file. Here a default video file is loaded as you can see below
 
