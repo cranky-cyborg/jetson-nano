@@ -8,7 +8,7 @@ sudo apt remove -y libreoffice-writer libreoffice-impress libreoffice-math libre
 
 #Second the games, and music (some video and music players will still be present after this)
 
-sudo apt remove -y aisleriot compton gnome-mahjongg gnome-mines gnome-sudoku leafpad thunderbird ibus-table transmission-common rhythmbox lxmusic
+sudo apt remove -y aisleriot compton gnome-mahjongg gnome-mines gnome-sudoku leafpad thunderbird transmission-common rhythmbox lxmusic
 
 #Third the fonts
 
@@ -16,7 +16,7 @@ sudo apt remove -y fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fo
 
 # Fourth goes the utilities, such as Scan, onscreen keyboard, etc.,
 
-sudo apt remove -y gpicview xterm simple-scan shotwell system-config-printer deja-dup lxterminal gnome-todo yelp onboard xserver-xorg-input-wacom
+sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard 
 
 # Cleaning up any lingering packages
 
