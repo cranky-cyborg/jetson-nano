@@ -16,7 +16,7 @@ sudo apt remove -y fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fo
 
 # Fourth goes the utilities, such as Scan, onscreen keyboard, etc.,
 
-sudo apt remove -y gpicview xterm transmission-common simple-scan shotwell system-config-printer deja-dup lxterminal gnome-todo unity-lens-photos yelp onboard gnome-screenshot xserver-xorg-input-wacom gnome-calendar
+sudo apt remove -y gpicview xterm simple-scan shotwell system-config-printer deja-dup lxterminal gnome-todo yelp onboard xserver-xorg-input-wacom
 
 # Cleaning up any lingering packages
 
