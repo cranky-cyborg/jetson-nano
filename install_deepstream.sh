@@ -29,4 +29,4 @@ sudo apt install --reinstall nvidia-l4t-core
 
 # install deepstream from package (approx 600mb)
 
-sudo apt install ~/drivers/deepstream-6.0_6.0.1-1_arm64.deb
+sudo apt install /deepstream-6.0.1/deepstream-6.0_6.0.1-1_arm64.deb
