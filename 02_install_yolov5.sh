@@ -13,15 +13,16 @@ export OPENBLAS_CORETYPE=ARMV8
 
 #create Python Virtual Environment
 cd ~
-python3 -m venv ve-yolov5
+python3 -m venv ve-yolov5 --system-site-packages
 
 #activate Py Virtual Env
 source ~/ve-yolov5/bin/activate
 
 #update pip and other modules
 python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade setuptools
-python3 -m pip install wheel
+
+#update all pip packages
+python3 -m pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 python3 -m pip install -U
 
 # yolo v5
 git clone https://github.com/pawangonnakuti/yolov5-jetson-nano.git yolov5
