@@ -18,6 +18,11 @@ python3 -m venv ve-yolov5
 #activate Py Virtual Env
 source ~/ve-yolov5/bin/activate
 
+#update pip and other modules
+python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade setuptools
+python3 -m pip install wheel
+
 # yolo v5
 git clone https://github.com/pawangonnakuti/yolov5-jetson-nano.git yolov5
 
