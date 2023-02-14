@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~
 sudo apt update
 
 echo "Installing DeepStreem 6.0.1"
@@ -17,6 +18,8 @@ sudo apt install -y libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-go
 #sudo apt install -y libssl1.1 libjansson4 libyaml-cpp-dev
 
 echo " - Install Apache Kafka from source"
+
+cd ~
 
 # Clone librdkafka from github
 git clone https://github.com/edenhill/librdkafka.git
