@@ -32,10 +32,13 @@ echo "Upgrading Ubuntu, and installing zram to increase swap, and nano a much ni
 # Update upgrade and install some packages that we will use.
 
 sudo apt update -y
+sudo apt install zram-config nano
+#Only for Pawan's Nano (as it uses TP-Link Wifi)
+cd ~/drivers/RTL88x2BU-Linux-Driver-master/
+sudo modprobe -r 88x2bu
+sudo make clean
 echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
 sudo apt upgrade -y 
-
-sudo apt install zram-config nano
 
 echo "Permission change to support Docker"
 
@@ -52,5 +55,10 @@ echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 #increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
 echo "increasing swap space from 2GB to 8GB for 4GB ram models."
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
+
+
+
+
+
 
 
