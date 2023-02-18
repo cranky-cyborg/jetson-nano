@@ -20,14 +20,16 @@ source ~/ve-yolov5/bin/activate
 
 #update pip and other modules
 python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade setuptools
+python3 -m pip install wheel
 
 #update all pip packages
 python3 -m pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 python3 -m pip install -U
 
 # yolo v5
-git clone https://github.com/pawangonnakuti/yolov5-jetson-nano.git yolov5
+git clone https://github.com/pawangonnakuti/yolov5.git yolov5
 
-cd yolov5
+cd ~/yolov5
 
 # i've edited requirements.txt in my repo, if using any other repo you will need to comment torch ad torchvision
 #cp requirements.txt requirements.txt.bkup
@@ -48,30 +50,33 @@ wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -
 
 python3 -m pip install torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 
-#install TorchVision
-git clone --branch v0.11.1 https://github.com/pytorch/vision torchvision
-cd torchvision
-sudo python3 setup.py install 
+#install TorchVision (0.11.3 is the latest torchvision, the NVidia website refers to 0.11.1)
+git clone --branch v0.11.3 https://github.com/pytorch/vision torchvision
+cd ~/torchvision
 
+#below step is going to take some time.
+sudo python3 setup.py install 
 
 #build deepSteam-yolo
 cd ~
-git clone https://github.com/marcoslucianops/DeepStream-Yolo
+git clone https://github.com/pawangonnakuti/DeepStream-Yolo
 
-cp DeepStream-Yolo/utils/gen_wts_yoloV5.py yolov5
+cp ~/DeepStream-Yolo/utils/gen_wts_yoloV5.py ~/yolov5
 
-cd yolov5
+cd ~/yolov5
+
+wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5n.pt
+
+#other pt files
+wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5n6.pt
+wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5s6.pt
 wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5s.pt
 
-#other pt files 
-wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5s6.pt
-wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5n.pt
-wget https://github.com/ultralytics/yolov5/releases/download/v6.1/yolov5n6.pt
 
-python3 gen_wts_yoloV5.py -w yolov5s.pt -s 1280
+python3 gen_wts_yoloV5.py -w yolov5n.pt -s 1280
 
-cp yolov5s.cfg ~/DeepStream-Yolo
-cp yolov5s.wts ~/DeepStream-Yolo
+cp yolov5n.cfg ~/DeepStream-Yolo
+cp yolov5n.wts ~/DeepStream-Yolo
 
 cd ~/DeepStream-Yolo
 CUDA_VER=10.2 make -C nvdsinfer_custom_impl_Yolo
@@ -95,7 +100,7 @@ CUDA_VER=10.2 make -C nvdsinfer_custom_impl_Yolo
 #> config-file=config_infer_primary_yoloV5.txt
 
 #changing the primary inference file to config_infer_primary_yoloV5.txt
-sed -i 's/^config-file=config_infer_primary.txt/config-file=cconfig_infer_primary_yoloV5.txt/' deepstream_app_config.txt
+sed -i 's/^config-file=config_infer_primary.txt/config-file=config_infer_primary_yoloV5.txt/' deepstream_app_config.txt
 
 # Change the video source in deepstream_app_config file. Here a default video file is loaded as you can see below
 
