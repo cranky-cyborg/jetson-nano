@@ -49,5 +49,8 @@ echo "sudo command will not ask for password anymore for the ${USER}"
 echo " " | sudo EDITOR='tee -a' visudo
 echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 
+#increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
+echo "increasing swap space from 2GB to 8GB for 4GB ram models."
+sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
 
 
