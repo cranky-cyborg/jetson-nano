@@ -15,6 +15,10 @@ export OPENBLAS_CORETYPE=ARMV8
 cd ~
 python3 -m venv ve-yolov5 --system-site-packages
 
+#create aliases for commonly used commands
+alias pyp='python3 -m pip'
+alias ve-yolov5='source ~/ve-yolov5/bin/activate'
+
 #activate Py Virtual Env
 source ~/ve-yolov5/bin/activate
 
