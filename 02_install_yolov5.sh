@@ -62,7 +62,7 @@ git clone --branch v0.11.3 https://github.com/pytorch/vision torchvision
 cd ~/torchvision
 
 #below step is going to take some time.
-sudo python3 setup.py install 
+python3 setup.py install 
 
 #build deepSteam-yolo
 cd ~
