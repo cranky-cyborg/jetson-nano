@@ -60,6 +60,9 @@ echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 echo "increasing swap space from 2GB to 8GB for 4GB ram models."
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
 
+#remove Python2 (Older versions of python)
+sudo apt remove -y python python2.7
+sudo apt -y autoremove
 
 
 
