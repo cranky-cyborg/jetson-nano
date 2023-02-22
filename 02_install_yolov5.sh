@@ -10,16 +10,16 @@ python3 -m pip install --upgrade pip
 #set environment variable
 echo 'export OPENBLAS_CORETYPE=ARMV8' | tee -a ~/.bashrc
 export OPENBLAS_CORETYPE=ARMV8
+OPENBLAS_CORETYPE=ARMV8
 
 #create Python Virtual Environment
 cd ~
 python3 -m venv ve-yolov5 --system-site-packages
 
 #create aliases for commonly used commands
-alias pyp='python3 -m pip'
-alias ve-yolov5='source ~/ve-yolov5/bin/activate'
 
 #activate Py Virtual Env
+echo "activating Python3 Virtual Environment"
 source ~/ve-yolov5/bin/activate
 
 #update pip and other modules
@@ -118,3 +118,8 @@ sed -i 's/^config-file=config_infer_primary.txt/config-file=config_infer_primary
 # run the inference
 
 deepstream-app -c deepstream_app_config.txt
+
+echo "Deactivating Python3 Virtual Environment"
+echo ""
+echo ""
+echo "Thank you"
