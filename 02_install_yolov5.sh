@@ -22,6 +22,9 @@ python3 -m venv ve-yolov5 --system-site-packages
 echo "activating Python3 Virtual Environment"
 source ~/ve-yolov5/bin/activate
 
+export OPENBLAS_CORETYPE=ARMV8
+OPENBLAS_CORETYPE=ARMV8
+
 #update pip and other modules
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
