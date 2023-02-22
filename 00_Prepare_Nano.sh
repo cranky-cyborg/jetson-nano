@@ -33,12 +33,15 @@ echo "Upgrading Ubuntu, and installing zram to increase swap, and nano a much ni
 
 sudo apt update -y
 sudo apt install zram-config nano
+sudo apt upgrade -y --download-only
+
 #Only for Pawan's Nano (as it uses TP-Link Wifi)
 cd ~/drivers/RTL88x2BU-Linux-Driver-master/
 sudo modprobe -r 88x2bu
 sudo make clean
+
 echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
-sudo apt upgrade -y 
+sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
 echo "Permission change to support Docker"
 
