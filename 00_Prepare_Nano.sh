@@ -39,6 +39,7 @@ sudo apt upgrade -y --download-only
 cd ~/drivers/RTL88x2BU-Linux-Driver-master/
 sudo modprobe -r 88x2bu
 sudo make clean
+sudo rm -f /lib/modules/4.9.253-tegra/kernel/drivers/net/wireless/88x2bu.ko
 
 echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
