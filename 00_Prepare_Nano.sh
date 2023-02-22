@@ -64,6 +64,9 @@ sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
 sudo apt remove -y python python2.7
 sudo apt -y autoremove
 
+#unsure about the below package, (Experimental)
+#sudo apt remove -y python3-matplotlib python-matplotlib-data
+
 
 
 
