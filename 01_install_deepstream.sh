@@ -51,3 +51,6 @@ echo "Install DeepStream package, from folder /deepsteam-6.0.1"
 # install deepstream from package (approx 600mb)
 
 sudo apt install /deepstream-6.0.1/deepstream-6.0_6.0.1-1_arm64.deb
+
+echo "Run deepstream example"
+deepstream-app -c /opt/nvidia/deepstream/deepstream-6.0/samples/configs/deepstream-app/source30_1080p_dec_infer-resnet_tiled_display_int8.txt
