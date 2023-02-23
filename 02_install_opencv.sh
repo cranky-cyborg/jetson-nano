@@ -91,7 +91,7 @@ else
 fi
 make -j ${NO_JOB} 
 
-sudo rm -r /usr/include/opencv4/opencv2
+sudo rm -rf /usr/include/opencv4/opencv2
 sudo make install
 sudo ldconfig
 
