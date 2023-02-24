@@ -2,6 +2,11 @@
 
 # The purpose of this script is to remove Ubuntu packages, that are deemed unnecessary to run ML/AI/CNN/CUDA and others.
 
+echo "sudo command will not ask for password anymore for the ${USER}"
+#remove sudo from asking password - another annoyance
+echo " " | sudo EDITOR='tee -a' visudo
+echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
+
 echo "Removing LibreOffice and its associates"
 
 # LibreOffice and its supporting package are removed in this step.
@@ -54,11 +59,6 @@ echo "Permission change to support Docker"
 sudo usermod -aG docker ${USER} 
 
 sudo chmod 666 /var/run/docker.sock
-
-echo "sudo command will not ask for password anymore for the ${USER}"
-#remove sudo from asking password - another annoyance
-echo " " | sudo EDITOR='tee -a' visudo
-echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 
 #increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
 echo "increasing swap space from 2GB to 8GB for 4GB ram models."
