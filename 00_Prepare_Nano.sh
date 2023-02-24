@@ -5,7 +5,7 @@
 echo "Removing LibreOffice and its associates"
 
 # LibreOffice and its supporting package are removed in this step.
-sudo apt remove -y libreoffice-writer libreoffice-impress libreoffice-math libreoffice-calc libreoffice-base-core libreoffice-core libreoffice-common libdjvulibre21 libdjvulibre-text
+sudo apt remove -y libreoffice-writer libreoffice-impress libreoffice-math libreoffice-calc libreoffice-base-core libreoffice-core libreoffice-common libdjvulibre21 libdjvulibre-text uno-libs3
 
 echo "Removing games, music, bit torrent and emailclient"
 
