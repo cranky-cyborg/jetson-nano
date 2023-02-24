@@ -25,7 +25,7 @@ sudo apt remove -y fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fo
 echo "Removing, Utilitis, scaning, and onscreen keyboard, etc.,"
 
 # Removing utilities, such as Scan, onscreen keyboard, etc.,#remove Python2 (Older versions of python)
-sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard python python2.7 python3-matplotlib python-matplotlib-data
+sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard python3-matplotlib python-matplotlib-data
 
 echo "Removing orphaned packages with Autoremove"
 # Cleaning up any lingering packages
@@ -63,6 +63,8 @@ sudo chmod 666 /var/run/docker.sock
 #increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
 echo "increasing swap space from 2GB to 8GB for 4GB ram models."
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
+
+#Python 2.7 can be remove here, python package are still needed to setup n4l bootloder and xusb packages.
 
 #sudo reboot
 
