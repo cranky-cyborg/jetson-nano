@@ -46,7 +46,7 @@ cd ~
 rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
 
 echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
-printf "y\ny\n\n" | sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
+printf "y\ny\n" | sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
 echo "Permission change to support Docker"
 
