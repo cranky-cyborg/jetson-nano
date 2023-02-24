@@ -19,8 +19,8 @@ sudo apt remove -y fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fo
 
 echo "Removing, Utilitis, scaning, and onscreen keyboard, etc.,"
 
-# Removing utilities, such as Scan, onscreen keyboard, etc.,
-sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard 
+# Removing utilities, such as Scan, onscreen keyboard, etc.,#remove Python2 (Older versions of python)
+sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard python python2.7 python3-matplotlib python-matplotlib-data
 
 echo "Removing orphaned packages with Autoremove"
 # Cleaning up any lingering packages
@@ -40,9 +40,11 @@ cd ~/drivers/RTL88x2BU-Linux-Driver-master/
 sudo modprobe -r 88x2bu
 sudo make clean
 sudo rm -f /lib/modules/4.9.253-tegra/kernel/drivers/net/wireless/88x2bu.ko
+cd ~
+rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
 
 echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
-sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
+printf "y\ny\n\n" | sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
 echo "Permission change to support Docker"
 
@@ -60,12 +62,7 @@ echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 echo "increasing swap space from 2GB to 8GB for 4GB ram models."
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
 
-#remove Python2 (Older versions of python)
-sudo apt remove -y python python2.7
-sudo apt -y autoremove
-
-#unsure about the below package, (Experimental)
-#sudo apt remove -y python3-matplotlib python-matplotlib-data
+sudo reboot
 
 
 
