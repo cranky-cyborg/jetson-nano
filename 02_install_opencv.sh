@@ -26,6 +26,10 @@ sudo apt-get install -y liblapack-dev liblapacke-dev libeigen3-dev gfortran
 sudo apt-get install -y libhdf5-dev protobuf-compiler
 sudo apt-get install -y libprotobuf-dev libgoogle-glog-dev libgflags-dev
 
+sudo apt-get remove -y python2* python libpython2* libopencv-python libpython-* python-dev python-minimal
+
+sudo apt-get autoremove -y
+
 # remove old versions or previous builds
 cd ~ 
 sudo rm -rf opencv*
