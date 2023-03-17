@@ -12,11 +12,16 @@ read -p " Press (Y)es to install 88x2bu Kernel drivers" yn88x
 
 if [[ $yn88x =~ ^[Yy]$ ]]
 then
-  cd ~/drivers/RTL88x2BU-Linux-Driver-master
+  cd ~
+  rm -rf ~/drivers
+  cd drivers
+  cp /drivers/* .
+  unzip RTL88x2BU-Linux-Driver-master.zip
+  cd RTL88x2BU-Linux-Driver-master
   make
   sudo make install
   sudo modprobe 88x2bu rtw_switch_usb_mode=1
-  sleep 15 
+  sleep 15
 fi
 
 echo "Step 1: Download DeepStreem 6.0.1 (Manual Step)"
@@ -37,7 +42,7 @@ sudo apt update
 echo "Step 2: Install dependencies from repositories"
 echo "  dependencies are libssl, libjansson, nvidia-jetpack and multiple gstreamer libraries
 "
-read -p "Please press any key to continue... : "
+#read -p "Please press any key to continue... : "
 #Install package dependencies for deepstream 6.0.1
 sudo apt install -y libssl1.0.0 libjansson4=2.11-1
 sudo apt install -y libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 
@@ -48,7 +53,7 @@ sudo apt install -y nvidia-jetpack
 
 echo "Step 3: Install Apache Kafka from source (github)
 "
-read -p "Please press any key to continue... : "
+#read -p "Please press any key to continue... : "
 cd ~
 
 # Clone librdkafka from github
@@ -58,20 +63,20 @@ cd librdkafka
 # i didn't do the research as to why, or know the implications of not doing it
 git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a
 
-read -p " Note: Ignore any warnings / disables, as long as the command doesn't fail
-Please press any key to run configuration (Apache Kafka) : "
+#read -p " Note: Ignore any warnings / disables, as long as the command doesn't fail
+#Please press any key to run configuration (Apache Kafka) : "
 
 # run the config, Note: ignore any warning/disables, as long as the command doesn't fail
 ./configure
-read -p " Check if the command exited succesfully.
-Please press any key to continue... : "
+#read -p " Check if the command exited succesfully.
+#Please press any key to continue... : "
 # make and install
 make
 sudo make install
 
 
 echo "Step 4: Install nvidia and deepstream package"
-read -p "Please press any key to continue... : "
+#read -p "Please press any key to continue... : "
 # Create the deepstream folder
 # copy the files to the deepstream folder
 sudo mkdir -p /opt/nvidia/deepstream/deepstream-6.0/lib
