@@ -90,7 +90,7 @@ sudo apt -y autoremove
 echo "Step 3: Update and download Ubuntu's Package Library"
 echo "        This step requires internet connectivity and take 45 to 60mins"
 echo " "
-read -p " Please press any key to continue... : "
+#read -p " Please press any key to continue... : "
 
 sudo apt update -y
 sudo apt install zram-config nano
@@ -122,14 +122,14 @@ sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
 echo "Step 6: Permission changes are required to run Docker service ( know workaround )"
 echo " "
-read -p " Please press any key to continue... : "
+#read -p " Please press any key to continue... : "
 
 sudo usermod -aG docker ${USER} 
 sudo chmod 666 /var/run/docker.sock
 
 echo "Step 7: Increasing Swap Space (by 4 times)"
 echo " "
-read -p " Please press any key to continue... : "
+#read -p " Please press any key to continue... : "
 
 #increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
