@@ -1,54 +1,115 @@
 #!/bin/bash
 
-# The purpose of this script is to remove Ubuntu packages, that are deemed unnecessary to run ML/AI/CNN/CUDA and others.
+# The purpose of this script is to remove unnecessary Ubuntu packages,unnecessary to run ML/AI/CNN/CUDA and others.
+# and make general changes that will make the development life easy.
 
-echo "sudo command will not ask for password anymore for the ${USER}"
-#remove sudo from asking password - another annoyance
-echo " " | sudo EDITOR='tee -a' visudo
-echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
+# NOTE: this is an Interactive script, needed attenting a few time.
 
-echo "Removing LibreOffice and its associates"
+echo "Step 1: Remove sudo command from asking password again for '${USER}'"
+echo "        This change is for Command line only"
+#echo "        Enter (Y)es to confirm, or (N)o to skip : "
+while true; do
+  read -p "        Enter (Y)es to confirm, or (N)o to skip : "      yn
+  case $yn in
+    [Yy]* ) echo " 
+${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
+      break;;
+    [Nn]* ) exit;;
+    * ) echo "         >> Invalid Input, try again!";;
+  esac
+done
 
-# LibreOffice and its supporting package are removed in this step.
-sudo apt remove -y libreoffice-writer libreoffice-impress libreoffice-math libreoffice-calc libreoffice-base-core libreoffice-core libreoffice-common libdjvulibre21 libdjvulibre-text uno-libs3
+#-------------------------------------------------------------------------
+echo "Step 2: Remove Python2, Libre Office suite, Email-client, Games, "
+echo "        Music players,  Non-english fonts & Utilities. "
+echo " Utilities - (Todo, Yelp, scan, backup, onboard, xterm, shotwell,
+   Bit-torrent,)"
+while true; do
+  read -p "        Enter (A)ll to remove all, or (S)elective to selectively
+  remove, or (N)o to remove nothing : " asn
+  case $asn in
+    [AaSs]* ) echo "Lets select : "
+      if [[ $asn =~ ^[Ss]$ ]]
+      then
+        read -p "   >> Remove Python2               [Y/N] : " ynPy
+        read -p "   >> Remove Libre Office suite    [Y/N] : " ynLibre
+        read -p "   >> Remove Email-client          [Y/N] : " ynEmail
+        read -p "   >> Remove All Games & Music     [Y/N] : " ynGames
+        read -p "   >> Remove Bit-torrent clients   [Y/N] : " ynBittorrent
+        read -p "   >> Remove Non-english fonts     [Y/N] : " ynFonts
+        read -p "   >> Remove Utilities             [Y/N] : " ynUtils
+      fi
+	break;;
+    [Nn]* ) exit;;
+    * ) echo "         >> Invalid Input, try again!";;
+  esac
+done
 
-echo "Removing games, music, bit torrent and emailclient"
+  # remove python
+  if [[ $asn =~ ^[Aa]$ || $ynPy =~ ^[Yy]$ ]]
+  then
+    sudo apt-get remove -y python2* python libpython2* python-dev python-minimal
+  fi
 
-#Second the games, and music (some video and music players will still be present after this)
-sudo apt remove -y aisleriot compton gnome-mahjongg gnome-mines gnome-sudoku leafpad thunderbird transmission-common rhythmbox lxmusic
+  # remove Libre Office suite
+  if [[ $asn =~ ^[Aa]$ || $ynLibre =~ ^[Yy]$ ]]
+  then
+    sudo apt remove -y libreoffice-writer libreoffice-impress libreoffice-math libreoffice-calc libreoffice-base-core libreoffice-core libreoffice-common libdjvulibre21 libdjvulibre-text uno-libs3
+  fi
 
-echo "Removing fonts (non-english)"
+  # remove Email-client
+  if [[ $asn =~ ^[Aa]$ || $ynEmail =~ ^[Yy]$ ]]
+  then
+    sudo apt remove -y thunderbird
+  fi
 
-# Remove Indian fonts
-sudo apt remove -y fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-mlym fonts-lohit-orya fonts-lohit-taml fonts-lohit-taml-classical fonts-lohit-telu
+  # remove All Games
+  if [[ $asn =~ ^[Aa]$ || $ynGames =~ ^[Yy]$ ]]
+  then
+    sudo apt remove -y aisleriot compton gnome-mahjongg gnome-mines gnome-sudoku rhythmbox lxmusic
+  fi
 
-echo "Removing, Utilitis, scaning, and onscreen keyboard, etc.,"
+  # remove Non-english fonts
+  if [[ $asn =~ ^[Aa]$ || $ynFonts =~ ^[Yy]$ ]]
+  then
+    sudo apt remove -y fonts-lohit-beng-bengali fonts-lohit-deva fonts-lohit-gujr fonts-lohit-guru fonts-lohit-knda fonts-lohit-mlym fonts-lohit-orya fonts-lohit-taml fonts-lohit-taml-classical fonts-lohit-telu
+  fi
 
-# Removing utilities, such as Scan, onscreen keyboard, etc.,#remove Python2 (Older versions of python)
-sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard python3-matplotlib python-matplotlib-data
+  # remove Utilities
+  if [[ $asn =~ ^[Aa]$ || $ynUtils =~ ^[Yy]$ ]]
+  then
+    sudo apt remove -y gpicview xterm simple-scan shotwell deja-dup gnome-todo yelp onboard leafpad transmission-common
+  fi
 
-echo "Removing orphaned packages with Autoremove"
-# Cleaning up any lingering packages
+echo "Cleaning-up orphaned packages"
 sudo apt -y autoremove
 
-echo "----------------------------------------------------------------"
+#-------------------------------------------------------------------------
+echo "Step 3: Update and download Ubuntu's Package Library"
 
-echo "Upgrading Ubuntu, and installing zram to increase swap, and nano a much nicer editor than vi"
-# Update upgrade and install some packages that we will use.
+echo " >> This step requires internet connectivity and take 45 to 60mins"
+read -p " Please press any key to continue... : "
 
 sudo apt update -y
 sudo apt install zram-config nano
 sudo apt upgrade -y --download-only
 
-#Only for Pawan's Nano (as it uses TP-Link Wifi)
-cd ~/drivers/RTL88x2BU-Linux-Driver-master/
-sudo modprobe -r 88x2bu
-sudo make uninstall
-sudo make clean
-sudo rm -f /lib/modules/4.9.253-tegra/kernel/drivers/net/wireless/88x2bu.ko
+echo "Step 4: remove TP-link wifi kernel drivers for Kernel Upgrade"
+echo "        Note: Drivers will need to be recompiled."
+read -p "   >> Remove Kernel Module 88x2bu  [Y/N] : " ynMod
+if [[ $ynMod =~ ^[Yy]$ ]]
+  then
+    cd ~/drivers/RTL88x2BU-Linux-Driver-master/
+    sudo modprobe -r 88x2bu
+    sudo make uninstall
+    sudo make clean
+    sudo rm -f /lib/modules/4.9.253-tegra/kernel/drivers/net/wireless/88x2bu.ko
+    
+    cd ~
+    rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
+fi
 
-cd ~
-rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
+
 
 echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
