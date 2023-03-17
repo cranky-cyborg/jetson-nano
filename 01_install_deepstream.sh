@@ -12,7 +12,7 @@ read -p " Press (Y)es to install 88x2bu Kernel drivers" yn88x
 
 if [[ $yn88x =~ ^[Yy]$ ]]
 then
-  cd ~/RTL88x2BU-Linux-Driver-master
+  cd ~/drivers/RTL88x2BU-Linux-Driver-master
   make
   sudo make install
   sudo modprobe 88x2bu rtw_switch_usb_mode=1
