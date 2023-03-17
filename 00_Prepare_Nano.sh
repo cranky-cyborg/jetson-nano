@@ -86,8 +86,8 @@ sudo apt -y autoremove
 
 #-------------------------------------------------------------------------
 echo "Step 3: Update and download Ubuntu's Package Library"
-
-echo " >> This step requires internet connectivity and take 45 to 60mins"
+echo "        This step requires internet connectivity and take 45 to 60mins"
+echo " "
 read -p " Please press any key to continue... : "
 
 sudo apt update -y
@@ -96,6 +96,7 @@ sudo apt upgrade -y --download-only
 
 echo "Step 4: remove TP-link wifi kernel drivers for Kernel Upgrade"
 echo "        Note: Drivers will need to be recompiled."
+echo " "
 read -p "   >> Remove Kernel Module 88x2bu  [Y/N] : " ynMod
 if [[ $ynMod =~ ^[Yy]$ ]]
   then
@@ -109,25 +110,36 @@ if [[ $ynMod =~ ^[Yy]$ ]]
     rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
 fi
 
+echo "Step 5: Upgrade Ubuntu Kernel, Firmware and other packages"
+echo "        Note: Kernel / Firmware upgrade is interactive"
+echo "        Note: Docker package upgrade is interactive"
+echo " "
+read -p " Please press any key to continue... : "
 
-
-echo "you will be requested to enter 'Y' a couple time, and selected 'Yes' for Docker"
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
-echo "Permission change to support Docker"
+echo "Step 6: Permission changes are required to run Docker service ( know workaround )"
+echo " "
+read -p " Please press any key to continue... : "
 
-#an issue with docker, when running the service
 sudo usermod -aG docker ${USER} 
-
 sudo chmod 666 /var/run/docker.sock
 
+echo "Step 7: Increasing Swap Space (by 4 times)"
+echo " "
+read -p " Please press any key to continue... : "
+
 #increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
-echo "increasing swap space from 2GB to 8GB for 4GB ram models."
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
 
-#Python 2.7 can be remove here, python package are still needed to setup n4l bootloder and xusb packages.
+echo "Step 8: The system will now reboot"
+echo " "
+read -p "   >> Reboot operating system      [Y/N] : " ynReboot
+if [[ $ynReboot =~ ^[Yy]$ ]]
+  then
+	sudo reboot
+fi
 
-#sudo reboot
 
 
 
