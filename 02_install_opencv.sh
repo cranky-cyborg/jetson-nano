@@ -49,7 +49,7 @@ if [[ $opCV -eq 1 ]] then
   unzip opencv_contrib.zip 
   mv opencv-4.6.0 opencv
   mv opencv_contrib-4.6.0 opencv_contrib
-else if [[ $opCV -eq 2 ]] then
+elif [[ $opCV -eq 2 ]] then
   # download version 4.7.0
   wget -O opencv.zip https://github.com/opencv/opencv/archive/4.7.0.zip 
   wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.7.0.zip 
