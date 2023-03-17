@@ -51,6 +51,32 @@ sudo apt install -y nvidia-jetpack
 #for DeepSteam 6.2 (Note: 6.2 is not supported on Jetson Nano)
 #sudo apt install -y libssl1.1 libjansson4 libyaml-cpp-dev
 
+# Dependencies from OpenCV script.
+echo "Step 2.11: Add CUDA location to L4T config and install dependencies"
+# reveal the CUDA location
+cd ~
+sudo sh -c "echo '/usr/local/cuda/lib64' >> /etc/ld.so.conf.d/nvidia-tegra.conf"
+sudo ldconfig
+
+sudo apt-get install -y build-essential cmake pkg-config zlib1g-dev
+sudo apt-get install -y libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev
+sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libglew-dev
+sudo apt-get install -y libgtk-3-dev libcanberra-gtk3*
+sudo apt-get install -y python3-dev python3-numpy python3-pip
+sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
+sudo apt-get install -y libtbb2 libtbb-dev libdc1394-22-dev libxine2-dev
+sudo apt-get install -y gstreamer1.0-tools libv4l-dev v4l-utils qv4l2 
+sudo apt-get install -y libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev
+sudo apt-get install -y libavresample-dev libvorbis-dev libxine2-dev libtesseract-dev
+sudo apt-get install -y libfaac-dev libmp3lame-dev libtheora-dev libpostproc-dev
+sudo apt-get install -y libopencore-amrnb-dev libopencore-amrwb-dev
+sudo apt-get install -y libopenblas-dev libatlas-base-dev libblas-dev
+sudo apt-get install -y liblapack-dev liblapacke-dev libeigen3-dev gfortran
+sudo apt-get install -y libhdf5-dev protobuf-compiler
+sudo apt-get install -y libprotobuf-dev libgoogle-glog-dev libgflags-dev
+
+sudo apt-get autoremove -y
+
 echo "Step 3: Install Apache Kafka from source (github)
 "
 #read -p "Please press any key to continue... : "
