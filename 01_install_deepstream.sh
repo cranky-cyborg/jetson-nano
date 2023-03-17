@@ -7,6 +7,18 @@ Jetson-Nano - Script 01 - Install Deepstream
 The purpose of this script is to install necessary packages, libraries and 
 other tools, that are necessary to install and run Nvidia Deepstream libraries."
 
+echo "Step 0: Do you need to install Wifi drivers?"
+read -p " Press (Y)es to install 88x2bu Kernel drivers" yn88x
+
+if [[ $yn88x =~ ^[Yy]$ ]]
+then
+  cd ~/RTL88x2BU-Linux-Driver-master
+  make
+  sudo make install
+  sudo modprobe 88x2bu rtw_switch_usb_mode=1
+  sleep 15 
+fi
+
 echo "Step 1: Download DeepStreem 6.0.1 (Manual Step)"
 echo "  NOTE 1: Deepsteam v6.0.1 (approx 680MB) will need to be manually downloaded from NVidia website"
 echo "          link - https://developer.nvidia.com/deepstream_6.0.1/deepstream-6.0_6.0.1-1_arm64.deb
