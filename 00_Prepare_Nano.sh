@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# The purpose of this script is to remove unnecessary Ubuntu packages,unnecessary to run ML/AI/CNN/CUDA and others.
-# and make general changes that will make the development life easy.
+echo "
+The purpose of this script is to remove unnecessary Ubuntu packages, unnecessary
+to run ML/AI/CNN/CUDA and others. and make general changes that will make the
+development life easy.
 
-# NOTE: this is an Interactive script, needed attenting a few time.
+NOTE: this is an Interactive script, that needs attention"
 
 echo "Step 1: Remove sudo command from asking password again for '${USER}'"
 echo "        This change is for Command line only"
