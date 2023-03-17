@@ -1,19 +1,22 @@
 #!/bin/bash
 
-echo "Installing OpenCV 4.6.0 on Jetson Nano"
-echo "It will take 3 hours !"
+echo "
+The purpose of this script is to install OpenCV on Jetson Nano
+NOTE: this is an Interactive script, that needs attention and installation will take a few hours
 
+Credit: Adapted from https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html"
+
+echo "Step 1: Add CUDA location to L4T config and install dependencies"
 # reveal the CUDA location
 cd ~
 sudo sh -c "echo '/usr/local/cuda/lib64' >> /etc/ld.so.conf.d/nvidia-tegra.conf"
 sudo ldconfig
 
-# install the dependencies
 sudo apt-get install -y build-essential cmake pkg-config zlib1g-dev
 sudo apt-get install -y libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev
 sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libglew-dev
 sudo apt-get install -y libgtk-3-dev libcanberra-gtk3*
-#sudo apt-get install -y python3-dev python3-numpy python3-pip
+sudo apt-get install -y python3-dev python3-numpy python3-pip
 sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
 sudo apt-get install -y libtbb2 libtbb-dev libdc1394-22-dev libxine2-dev
 sudo apt-get install -y gstreamer1.0-tools libv4l-dev v4l-utils qv4l2 
@@ -26,23 +29,42 @@ sudo apt-get install -y liblapack-dev liblapacke-dev libeigen3-dev gfortran
 sudo apt-get install -y libhdf5-dev protobuf-compiler
 sudo apt-get install -y libprotobuf-dev libgoogle-glog-dev libgflags-dev
 
-sudo apt-get remove -y python2* python libpython2* python-dev python-minimal
-sudo apt-get remove -y libopencv-python libpython-* libopencv libopencv-dev libopencv-samples opencv-licenses
-
 sudo apt-get autoremove -y
 
 # remove old versions or previous builds
 cd ~ 
 sudo rm -rf opencv*
-# download the latest version
-wget -O opencv.zip https://github.com/opencv/opencv/archive/4.6.0.zip 
-wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.6.0.zip 
-# unpack
-unzip opencv.zip 
-unzip opencv_contrib.zip 
-# some administration to make live easier later on
-mv opencv-4.6.0 opencv
-mv opencv_contrib-4.6.0 opencv_contrib
+
+echo "Step 2: Determine OpenCV version to install"
+
+read -p "Choose an option from below:
+      1 ) Install OpenCV version 4.6.0
+      2 ) Install OpenCV version 4.7.0
+   Please enter 1 or 2, alternatively CTRL+C to cancel." opCV
+if [[ $opCV -eq 1 ]] then
+  # download version 4.6.0
+  wget -O opencv.zip https://github.com/opencv/opencv/archive/4.6.0.zip 
+  wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.6.0.zip 
+  unzip opencv.zip 
+  unzip opencv_contrib.zip 
+  mv opencv-4.6.0 opencv
+  mv opencv_contrib-4.6.0 opencv_contrib
+else if [[ $opCV -eq 2 ]] then
+  # download version 4.7.0
+  wget -O opencv.zip https://github.com/opencv/opencv/archive/4.7.0.zip 
+  wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.7.0.zip 
+  unzip opencv.zip 
+  unzip opencv_contrib.zip 
+  mv opencv-4.7.0 opencv
+  mv opencv_contrib-4.7.0 opencv_contrib
+else
+  echo "unknown option, exiting script"
+  exit 1;;
+fi
+
+echo "Step 3: Building and Installing OpenCV"
+
+read -p "Press any key to continue... :"
 # clean up the zip files
 rm opencv.zip
 rm opencv_contrib.zip
@@ -87,9 +109,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D BUILD_EXAMPLES=ON ..
 
 # run make
-
-NO_JOB=6
-
+NO_JOB=4
 make -j ${NO_JOB} 
 
 sudo rm -rf /usr/include/opencv4/opencv2
@@ -100,4 +120,11 @@ sudo ldconfig
 make clean
 sudo apt-get update
 
-echo "installed OpenCV 4.6.0"
+tmpfile=$(mktemp --suffix=.py) 
+cat << EOF > $tmpfile
+import cv2
+print(cv2.__version__)
+EOF
+
+cv_version=$(python3 $tmpfile)
+echo "installed OpenCV $cv_version, if no version is shown then the installtion errored out"
