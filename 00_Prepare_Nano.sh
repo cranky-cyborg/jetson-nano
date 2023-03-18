@@ -22,7 +22,7 @@ ${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
 done
 
 #-------------------------------------------------------------------------
-echo "Step 2: Remove Python2, Libre Office suite, Email-client, Games, "
+echo "Step 2: Remove Libre Office suite, Email-client, Games, "
 echo "        Music players,  Non-english fonts & Utilities. "
 echo " Utilities - (Todo, Yelp, scan, backup, onboard, xterm, shotwell,
    Bit-torrent,)"
@@ -33,7 +33,7 @@ while true; do
     [AaSs]* ) echo "Lets select : "
       if [[ $asn =~ ^[Ss]$ ]]
       then
-        read -p "   >> Remove Python2               [Y/N] : " ynPy
+ #       read -p "   >> Remove Python2               [Y/N] : " ynPy
         read -p "   >> Remove Libre Office suite    [Y/N] : " ynLibre
         read -p "   >> Remove Email-client          [Y/N] : " ynEmail
         read -p "   >> Remove All Games & Music     [Y/N] : " ynGames
@@ -48,10 +48,10 @@ while true; do
 done
 
   # remove python
-  if [[ $asn =~ ^[Aa]$ || $ynPy =~ ^[Yy]$ ]]
-  then
+#  if [[ $asn =~ ^[Aa]$ || $ynPy =~ ^[Yy]$ ]]
+#  then
 #    sudo apt-get remove -y python2* python libpython2* python-dev python-minimal
-  fi
+#  fi
 
   # remove Libre Office suite
   if [[ $asn =~ ^[Aa]$ || $ynLibre =~ ^[Yy]$ ]]
