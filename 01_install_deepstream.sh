@@ -8,7 +8,7 @@ The purpose of this script is to install necessary packages, libraries and
 other tools, that are necessary to install and run Nvidia Deepstream libraries."
 
 echo "Step 0: Do you need to install Wifi drivers?"
-read -p " Press (Y)es to install 88x2bu Kernel drivers" yn88x
+read -p " Press (Y)es to install 88x2bu Kernel drivers: " yn88x
 
 if [[ $yn88x =~ ^[Yy]$ ]]
 then
