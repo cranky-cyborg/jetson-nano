@@ -50,7 +50,7 @@ done
   # remove python
   if [[ $asn =~ ^[Aa]$ || $ynPy =~ ^[Yy]$ ]]
   then
-    sudo apt-get remove -y python2* python libpython2* python-dev python-minimal
+#    sudo apt-get remove -y python2* python libpython2* python-dev python-minimal
   fi
 
   # remove Libre Office suite
