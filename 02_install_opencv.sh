@@ -15,8 +15,9 @@ echo "Step 1: Determine OpenCV version to install"
 read -p "Choose an option from below:
       1 ) Install OpenCV version 4.6.0
       2 ) Install OpenCV version 4.7.0
-   Please enter 1 or 2, alternatively CTRL+C to cancel." opCV
+   Please enter 1 or 2, alternatively CTRL+C to cancel: " opCV
 if [[ $opCV -eq 1 ]] then
+  echo "Installing OpenCV 4.6.0"
   # download version 4.6.0
   wget -O opencv.zip https://github.com/opencv/opencv/archive/4.6.0.zip 
   wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.6.0.zip 
@@ -25,6 +26,7 @@ if [[ $opCV -eq 1 ]] then
   mv opencv-4.6.0 opencv
   mv opencv_contrib-4.6.0 opencv_contrib
 elif [[ $opCV -eq 2 ]] then
+  echo "Installing OpenCV 4.7.0"
   # download version 4.7.0
   wget -O opencv.zip https://github.com/opencv/opencv/archive/4.7.0.zip 
   wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.7.0.zip 
@@ -34,7 +36,7 @@ elif [[ $opCV -eq 2 ]] then
   mv opencv_contrib-4.7.0 opencv_contrib
 else
   echo "unknown option, exiting script"
-  exit 1;;
+  exit 1
 fi
 
 echo "Step 2: Building and Installing OpenCV"
