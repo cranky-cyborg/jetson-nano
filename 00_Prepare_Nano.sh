@@ -7,11 +7,23 @@ development life easy.
 
 NOTE: this is an Interactive script, that needs attention"
 
+assume_yes=false
+if [[ $1 =~ ^-[Aa]$ ]]
+then
+	echo "-a used: Assuming Yes to all prompts"
+	assume_yes=true
+fi
 echo "Step 1: Remove sudo command from asking password again for '${USER}'"
 echo "        This change is for Command line only"
 #echo "        Enter (Y)es to confirm, or (N)o to skip : "
 while true; do
-  read -p "        Enter (Y)es to confirm, or (N)o to skip : "      yn
+  if [ $assume_yes == true ]
+  then
+  	yn="y"
+  else
+  	read -p "        Enter (Y)es to confirm, or (N)o to skip : " yn
+  fi
+  
   case $yn in
     [Yy]* ) echo " 
 ${USER} ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
@@ -27,8 +39,14 @@ echo "        Music players,  Non-english fonts & Utilities. "
 echo " Utilities - (Todo, Yelp, scan, backup, onboard, xterm, shotwell,
    Bit-torrent,)"
 while true; do
-  read -p "        Enter (A)ll to remove all, or (S)elective to selectively
+  if [ $assume_yes == true ]
+  then
+  	asn="a"
+  else
+  	read -p "        Enter (A)ll to remove all, or (S)elective to selectively
   remove, or (N)o to remove nothing : " asn
+  fi
+  
   case $asn in
     [AaSs]* ) echo "Lets select : "
       if [[ $asn =~ ^[Ss]$ ]]
@@ -99,9 +117,17 @@ sudo apt upgrade -y --download-only
 echo "Step 4: remove TP-link wifi kernel drivers for Kernel Upgrade"
 echo "        Note: Drivers will need to be recompiled."
 echo " "
-read -p "   >> Remove Kernel Module 88x2bu  [Y/N] : " ynMod
+if [ $assume_yes == true ]
+then
+    ynMod="y"
+else
+    read -p "   >> Remove Kernel Module 88x2bu  [Y/N] : " ynMod
+fi
+
 if [[ $ynMod =~ ^[Yy]$ ]]
   then
+    if [ -f /drivers/install-RTL88x2BU.sh 
+    then
     cd ~/drivers/RTL88x2BU-Linux-Driver-master/
     sudo modprobe -r 88x2bu
     sudo make uninstall
@@ -110,36 +136,44 @@ if [[ $ynMod =~ ^[Yy]$ ]]
     
     cd ~
     rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
+    fi
 fi
 
 echo "Step 5: Upgrade Ubuntu Kernel, Firmware and other packages"
 echo "        Note: Kernel / Firmware upgrade is interactive"
 echo "        Note: Docker package upgrade is interactive"
 echo " "
-read -p " Please press any key to continue... : "
+if [ $assume_yes == false ]
+then
+  read -p " Please press any key to continue... : "
+fi
 
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
 echo "Step 6: Permission changes are required to run Docker service ( know workaround )"
 echo " "
-#read -p " Please press any key to continue... : "
 
 sudo usermod -aG docker ${USER} 
 sudo chmod 666 /var/run/docker.sock
 
 echo "Step 7: Increasing Swap Space (by 4 times)"
 echo " "
-#read -p " Please press any key to continue... : "
 
 #increase zram multiplier from /2 to *2 (i.e. from 2GB to 8GB, for 4GB model/ram).
 sudo sed -i 's|totalmem / 2|totalmem * 2|g' /usr/bin/init-zram-swapping
 
 echo "Step 8: The system will now reboot"
 echo " "
-read -p "   >> Reboot operating system      [Y/N] : " ynReboot
+if [ $assume_yes == true ]
+then
+  ynReboot="y"
+else
+  read -p "   >> Reboot operating system      [Y/N] : " ynReboot
+fi
+
 if [[ $ynReboot =~ ^[Yy]$ ]]
-  then
-	sudo reboot
+then
+  sudo reboot
 fi
 
 
