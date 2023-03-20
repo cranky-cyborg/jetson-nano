@@ -175,10 +175,3 @@ if [[ $ynReboot =~ ^[Yy]$ ]]
 then
   sudo reboot
 fi
-
-
-
-
-
-
-
