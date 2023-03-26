@@ -2,9 +2,9 @@
 
 cd ~
 
-sudo apt update
+#sudo apt update
 
-sudo apt install -y python3-pip python3-venv libfreetype6-dev tensorrt libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev libpng-dev
+#sudo apt install -y python3-pip python3-venv libfreetype6-dev tensorrt libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev libpng-dev
 python3 -m pip install --upgrade pip
 
 #set environment variable
