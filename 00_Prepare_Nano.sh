@@ -110,9 +110,33 @@ echo "        This step requires internet connectivity and take 45 to 60mins"
 echo " "
 #read -p " Please press any key to continue... : "
 
-sudo apt update -y
-sudo apt install zram-config nano
-sudo apt upgrade -y --download-only
+sudo apt update --yes 
+sudo apt upgrade --yes --download-only
+
+echo "DeepStream: Install dependencies from repositories"
+echo "  dependencies are libssl, libjansson, nvidia-jetpack and multiple gstreamer libraries
+"
+sudo apt-get install --yes --download-only \
+ build-essential cmake pkg-config zlib1g-dev \
+ libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev \
+ libavcodec-dev libavformat-dev libswscale-dev libglew-dev \
+ libgtk-3-dev libcanberra-gtk3* \
+ libxvidcore-dev libx264-dev libgtk-3-dev \
+ libtbb2 libtbb-dev libdc1394-22-dev libxine2-dev \
+ gstreamer1.0-tools libv4l-dev v4l-utils qv4l2 \
+ libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev \
+ libavresample-dev libvorbis-dev libxine2-dev libtesseract-dev \
+ libfaac-dev libmp3lame-dev libtheora-dev libpostproc-dev \
+ libopencore-amrnb-dev libopencore-amrwb-dev \
+ libopenblas-dev libatlas-base-dev libblas-dev \
+ liblapack-dev liblapacke-dev libeigen3-dev gfortran \
+ libhdf5-dev protobuf-compiler \
+ libprotobuf-dev libgoogle-glog-dev libgflags-dev \
+ python3-dev python3-numpy python3-pip \
+ libssl1.0.0 libjansson4=2.11-1 \
+ libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
+ gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
+ nvidia-jetpack zram-config nano
 
 echo "Step 4: remove TP-link wifi kernel drivers for Kernel Upgrade"
 echo "        Note: Drivers will need to be recompiled."
@@ -148,7 +172,31 @@ then
   read -p " Please press any key to continue... : "
 fi
 
+sudo apt-get install --yes --assume-yes --no-download --ignore-missing \
+ build-essential cmake pkg-config zlib1g-dev \
+ libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev \
+ libavcodec-dev libavformat-dev libswscale-dev libglew-dev \
+ libgtk-3-dev libcanberra-gtk3* \
+ libxvidcore-dev libx264-dev libgtk-3-dev \
+ libtbb2 libtbb-dev libdc1394-22-dev libxine2-dev \
+ gstreamer1.0-tools libv4l-dev v4l-utils qv4l2 \
+ libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev \
+ libavresample-dev libvorbis-dev libxine2-dev libtesseract-dev \
+ libfaac-dev libmp3lame-dev libtheora-dev libpostproc-dev \
+ libopencore-amrnb-dev libopencore-amrwb-dev \
+ libopenblas-dev libatlas-base-dev libblas-dev \
+ liblapack-dev liblapacke-dev libeigen3-dev gfortran \
+ libhdf5-dev protobuf-compiler \
+ libprotobuf-dev libgoogle-glog-dev libgflags-dev \
+ python3-dev python3-numpy python3-pip \
+ libssl1.0.0 libjansson4=2.11-1 \
+ libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
+ gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
+ nvidia-jetpack zram-config nano
+
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
+
+sudo apt-get autoremove -y
 
 echo "Step 6: Permission changes are required to run Docker service ( know workaround )"
 echo " "
