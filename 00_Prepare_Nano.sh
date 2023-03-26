@@ -128,11 +128,12 @@ sudo apt-get install --yes --download-only \
  libavresample-dev libvorbis-dev libxine2-dev libtesseract-dev \
  libfaac-dev libmp3lame-dev libtheora-dev libpostproc-dev \
  libopencore-amrnb-dev libopencore-amrwb-dev \
- libopenblas-dev libatlas-base-dev libblas-dev \
+ libopenblas-dev libopenblas-base libopenmpi-dev libatlas-base-dev libblas-dev \
  liblapack-dev liblapacke-dev libeigen3-dev gfortran \
  libhdf5-dev protobuf-compiler \
  libprotobuf-dev libgoogle-glog-dev libgflags-dev \
- python3-dev python3-numpy python3-pip \
+ python3-dev python3-numpy python3-pip python3-venv \
+ libfreetype6-dev tensorrt zlib1g-dev  \
  libssl1.0.0 libjansson4=2.11-1 \
  libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
  gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
@@ -184,11 +185,12 @@ sudo apt-get install --yes --assume-yes --no-download --ignore-missing \
  libavresample-dev libvorbis-dev libxine2-dev libtesseract-dev \
  libfaac-dev libmp3lame-dev libtheora-dev libpostproc-dev \
  libopencore-amrnb-dev libopencore-amrwb-dev \
- libopenblas-dev libatlas-base-dev libblas-dev \
+ libopenblas-dev libopenblas-base libopenmpi-dev libatlas-base-dev libblas-dev \
  liblapack-dev liblapacke-dev libeigen3-dev gfortran \
  libhdf5-dev protobuf-compiler \
  libprotobuf-dev libgoogle-glog-dev libgflags-dev \
- python3-dev python3-numpy python3-pip \
+ python3-dev python3-numpy python3-pip python3-venv \
+ libfreetype6-dev tensorrt zlib1g-dev  \
  libssl1.0.0 libjansson4=2.11-1 \
  libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
  gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
