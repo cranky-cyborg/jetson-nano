@@ -116,6 +116,9 @@ sudo apt upgrade --yes --download-only
 echo "DeepStream: Install dependencies from repositories"
 echo "  dependencies are libssl, libjansson, nvidia-jetpack and multiple gstreamer libraries
 "
+#removing nvidia-container-csv-tensorrt as there is an issue installing nvidia-container, this package will be reinstalled.
+sudo apt remove --yes nvidia-container-csv-tensorrt
+
 sudo apt-get install --yes --download-only \
  build-essential cmake pkg-config zlib1g-dev \
  libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev \
@@ -137,7 +140,7 @@ sudo apt-get install --yes --download-only \
  libssl1.0.0 libjansson4=2.11-1 \
  libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
  gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
- nvidia-jetpack zram-config nano
+ nvidia-jetpack nvidia-container nvidia-container-csv-tensorrt zram-config nano
 
 echo "Step 4: remove TP-link wifi kernel drivers for Kernel Upgrade"
 echo "        Note: Drivers will need to be recompiled."
@@ -194,7 +197,7 @@ sudo apt-get install --yes --assume-yes --no-download --ignore-missing \
  libssl1.0.0 libjansson4=2.11-1 \
  libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
  gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
- nvidia-jetpack zram-config nano
+ nvidia-jetpack nvidia-container nvidia-container-csv-tensorrt zram-config nano
 
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
