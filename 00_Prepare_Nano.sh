@@ -119,7 +119,7 @@ echo "  dependencies are libssl, libjansson, nvidia-jetpack and multiple gstream
 #removing nvidia-container-csv-tensorrt as there is an issue installing nvidia-container, this package will be reinstalled.
 sudo apt remove --yes nvidia-container-csv-tensorrt
 
-sudo apt-get install --yes --download-only \
+sudo apt install --yes --download-only \
  build-essential cmake pkg-config zlib1g-dev \
  libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev \
  libavcodec-dev libavformat-dev libswscale-dev libglew-dev \
@@ -137,7 +137,7 @@ sudo apt-get install --yes --download-only \
  libprotobuf-dev libgoogle-glog-dev libgflags-dev \
  python3-dev python3-numpy python3-pip python3-venv \
  libfreetype6-dev tensorrt zlib1g-dev  \
- libssl1.0.0 libjansson4=2.11-1 \
+ libssl1.0.0 libjansson4=2.11-1 libssl-dev liblz4-dev libsasl2-dev \
  libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
  gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
  nvidia-jetpack nvidia-container nvidia-container-csv-tensorrt zram-config nano
@@ -176,7 +176,7 @@ then
   read -p " Please press any key to continue... : "
 fi
 
-sudo apt-get install --yes --assume-yes --no-download --ignore-missing \
+sudo apt install --yes --assume-yes --no-download --ignore-missing \
  build-essential cmake pkg-config zlib1g-dev \
  libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev \
  libavcodec-dev libavformat-dev libswscale-dev libglew-dev \
@@ -194,14 +194,16 @@ sudo apt-get install --yes --assume-yes --no-download --ignore-missing \
  libprotobuf-dev libgoogle-glog-dev libgflags-dev \
  python3-dev python3-numpy python3-pip python3-venv \
  libfreetype6-dev tensorrt zlib1g-dev  \
- libssl1.0.0 libjansson4=2.11-1 \
+ libssl1.0.0 libjansson4=2.11-1 libssl-dev liblz4-dev libsasl2-dev \
  libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
  gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-0 \
  nvidia-jetpack nvidia-container nvidia-container-csv-tensorrt zram-config nano
 
 sudo apt upgrade --yes --assume-yes --no-download --ignore-missing
 
-sudo apt-get autoremove -y
+sudo apt autoremove --yes
+
+sudo apt clean
 
 echo "Step 6: Permission changes are required to run Docker service ( know workaround )"
 echo " "
