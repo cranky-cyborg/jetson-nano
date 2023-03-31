@@ -158,9 +158,10 @@ if [[ $ynMod =~ ^[Yy]$ ]]
     then
     cd ~/drivers/RTL88x2BU-Linux-Driver-master/
     sudo modprobe -r 88x2bu
+    sudo rmmod 88x2bu
     sudo make uninstall
     sudo make clean
-    sudo rm -f /lib/modules/4.9.253-tegra/kernel/drivers/net/wireless/88x2bu.ko
+    #sudo rm -f /lib/modules/4.9.253-tegra/kernel/drivers/net/wireless/88x2bu.ko
     
     cd ~
     rm -rf ~/drivers/RTL88x2BU-Linux-Driver-master
