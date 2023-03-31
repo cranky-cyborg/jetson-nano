@@ -16,7 +16,8 @@ read -p "Choose an option from below:
       1 ) Install OpenCV version 4.6.0
       2 ) Install OpenCV version 4.7.0
    Please enter 1 or 2, alternatively CTRL+C to cancel: " opCV
-if [[ $opCV -eq 1 ]] then
+if [[ $opCV -eq 1 ]] 
+then
   echo "Installing OpenCV 4.6.0"
   # download version 4.6.0
   wget -O opencv.zip https://github.com/opencv/opencv/archive/4.6.0.zip 
@@ -25,7 +26,8 @@ if [[ $opCV -eq 1 ]] then
   unzip opencv_contrib.zip 
   mv opencv-4.6.0 opencv
   mv opencv_contrib-4.6.0 opencv_contrib
-elif [[ $opCV -eq 2 ]] then
+elif [[ $opCV -eq 2 ]] 
+then
   echo "Installing OpenCV 4.7.0"
   # download version 4.7.0
   wget -O opencv.zip https://github.com/opencv/opencv/archive/4.7.0.zip 
@@ -86,7 +88,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D BUILD_EXAMPLES=ON ..
 
 # run make
-NO_JOB=4
+NO_JOB=6
 make -j ${NO_JOB} 
 
 sudo rm -rf /usr/include/opencv4/opencv2
