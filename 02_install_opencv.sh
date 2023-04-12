@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 echo "
 The purpose of this script is to install OpenCV on Jetson Nano
 NOTE: this is an Interactive script, that needs attention and installation will take a few hours
