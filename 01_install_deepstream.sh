@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo "
 Jetson-Nano - Script 01 - Install Deepstream
 

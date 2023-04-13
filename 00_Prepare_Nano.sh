@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 echo "
 The purpose of this script is to remove unnecessary Ubuntu packages, unnecessary
 to run ML/AI/CNN/CUDA and others. and make general changes that will make the
